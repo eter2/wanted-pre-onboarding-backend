@@ -1,8 +1,7 @@
 package eter2.spring_project.entity;
 
 import jakarta.persistence.*;
-
-import java.nio.file.Path;
+import java.util.Set;
 
 @Entity
 public class Post {
@@ -18,6 +17,9 @@ public class Post {
     private Integer compensation;
     private String description;
     private String skills;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private Set<Application> applications;
 
     public Long getId() {
         return id;
