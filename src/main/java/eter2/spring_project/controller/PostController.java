@@ -23,6 +23,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    // 공고 생성
     @PostMapping(produces = "application/json; charset=UTF-8")
     public ResponseEntity<?> createPost(@RequestBody PostRequestDTO postDTO) {
         try {
@@ -36,17 +37,20 @@ public class PostController {
         }
     }
 
+    // 공고 수정
     @PutMapping(value = "/{id}")
     public Post updatePost(@PathVariable Long id, @RequestBody Post postDetails) {
         return postService.updatePost(id, postDetails);
     }
 
+    // 공고 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         postService.deletePost(id);
         return ResponseEntity.ok().build();
     }
 
+    // 공고 리스트 불러오기
     @GetMapping
     public List<PostResponseDTO> getAllPosts() {
         List<Post> posts = postService.getAllPosts();
@@ -55,12 +59,14 @@ public class PostController {
                 .collect(Collectors.toList());
     }
 
+    // 공고 상세 정보 불러오기
     @GetMapping("/{id}")
     public ResponseEntity<PostDetailDTO> getPostById(@PathVariable Long id) {
         PostDetailDTO post = postService.getPostById(id);
         return ResponseEntity.ok(post);
     }
 
+    // 공고 검색
     @GetMapping(value = "/search", produces = "application/json; charset=UTF-8")
     public ResponseEntity<List<PostResponseDTO>> searchPosts(@RequestParam("search") String search) {
         List<PostResponseDTO> posts = postService.searchPosts(search);

@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
+    // 공고 검색 쿼리
     @Query("SELECT p FROM Post p WHERE " +
             "p.company.name LIKE %:search% OR " +
             "p.company.country LIKE %:search% OR " +
@@ -19,5 +20,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "p.skills LIKE %:search%")
     List<Post> searchPosts(@Param("search") String search);
 
+    // 공고 상세정보 불러오기 시 동일한 회사의 다른 공고 불러오기
     List<Post> findAllByCompanyId(Long companyId);
 }

@@ -31,6 +31,7 @@ public class PostService {
         this.companyRepository = companyRepository;
     }
 
+    // 공고 등록
     @Transactional
     public Post createPost(PostRequestDTO postRequestDTO) {
         Company company = companyRepository.findById(postRequestDTO.getCompanyId())
@@ -46,6 +47,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    // 공고 수정
     public Post updatePost(Long id, Post postDetails) {
         Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
 
@@ -65,14 +67,17 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    // 공고 삭제
     public  void deletePost(Long id) {
         postRepository.deleteById(id);
     }
 
+    // 공고 리스트 불러오기
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
 
+    // 공고 상세정보 불러오기
     @Transactional
     public PostDetailDTO getPostById(Long id) {
         Post post = postRepository.findById(id)
@@ -88,6 +93,7 @@ public class PostService {
         return dto;
     }
 
+    // 공고 검색
     public List<PostResponseDTO> searchPosts(String search) {
         List<Post> posts = postRepository.searchPosts(search);
         return posts.stream()
