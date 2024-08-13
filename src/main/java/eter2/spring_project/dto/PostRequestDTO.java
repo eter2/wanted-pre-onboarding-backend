@@ -20,4 +20,12 @@ public class PostRequestDTO {
         this.description = description;
         this.skills = skills;
     }
+
+    public void setCompanyId(Long companyId) { this.companyId = companyId; }
+    public void setPosition(String position) { this.position = position; }
+    public void setCompensation(Integer compensation) { this.compensation = compensation; }
+    public void setDescription(String description) { this.description = description; }
+    public void setSkills(String skills) { this.skills = skills; }
+
+    public PostRequestDTO() {}
 }

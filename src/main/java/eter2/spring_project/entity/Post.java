@@ -21,47 +21,16 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private Set<Application> applications;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Company getCompany() {
-        return this.company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public Integer getCompensation() {
-        return compensation;
-    }
-
-    public void setCompensation(int compensation) {
-        this.compensation = compensation;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getSkills() {
-        return skills;
-    }
-
-    public void setSkills(String skills) {
-        this.skills = skills;
-    }
+    public Long getId() { return id; }
+    public void setId(Long postId) { this.id = postId; }
+    public Company getCompany() { return this.company; }
+    public void setCompany(Company company) { this.company = company; }
+    public String getPosition() { return position; }
+    public void setPosition(String position) { this.position = position; }
+    public Integer getCompensation() { return compensation; }
+    public void setCompensation(int compensation) { this.compensation = compensation; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public String getSkills() { return skills; }
+    public void setSkills(String skills) { this.skills = skills; }
 }
