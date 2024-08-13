@@ -2,6 +2,7 @@ package eter2.spring_project.service;
 
 import eter2.spring_project.dto.PostRequestDTO;
 import eter2.spring_project.dto.PostResponseDTO;
+import eter2.spring_project.dto.PostDetailDTO;
 import eter2.spring_project.entity.Company;
 import eter2.spring_project.entity.Post;
 import eter2.spring_project.repository.CompanyRepository;
@@ -72,8 +73,19 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post getPostById(Long id) {
-        return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+    @Transactional
+    public PostDetailDTO getPostById(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post not found"));
+
+        PostDetailDTO dto = new PostDetailDTO(post);
+        List<Long> others = postRepository.findAllByCompanyId(post.getCompany().getId()).stream()
+                .map(Post::getId)
+                .filter(pId -> !pId.equals(id))
+                .collect(Collectors.toList());
+        dto.setOthers(others);
+
+        return dto;
     }
 
     public List<PostResponseDTO> searchPosts(String search) {

@@ -21,31 +21,11 @@ public class PostResponseDTO {
         this.skills = post.getSkills();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public Integer getCompensation() {
-        return compensation;
-    }
-
-    public String getSkills() {
-        return skills;
-    }
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public String getCountry() { return country; }
+    public String getRegion() { return region; }
+    public String getPosition() { return position; }
+    public Integer getCompensation() { return compensation; }
+    public String getSkills() {  return skills; }
 }

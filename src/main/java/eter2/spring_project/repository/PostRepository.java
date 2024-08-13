@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -17,4 +18,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "p.position LIKE %:search% OR " +
             "p.skills LIKE %:search%")
     List<Post> searchPosts(@Param("search") String search);
+
+    List<Post> findAllByCompanyId(Long companyId);
 }

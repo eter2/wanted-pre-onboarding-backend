@@ -2,8 +2,8 @@ package eter2.spring_project.controller;
 
 import eter2.spring_project.dto.PostRequestDTO;
 import eter2.spring_project.dto.PostResponseDTO;
+import eter2.spring_project.dto.PostDetailDTO;
 import eter2.spring_project.entity.Post;
-import eter2.spring_project.dto.PostRequestDTO;
 import eter2.spring_project.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -59,23 +55,14 @@ public class PostController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/{id}")
-    public Post getPostById(@PathVariable Long id) {
-        return postService.getPostById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDetailDTO> getPostById(@PathVariable Long id) {
+        PostDetailDTO post = postService.getPostById(id);
+        return ResponseEntity.ok(post);
     }
-
-//    @GetMapping(produces = "application/json; charset=UTF-8")
-//    public ResponseEntity<List<PostResponseDTO>> searchPosts(@RequestParam("search") String search) {
-//        List<PostResponseDTO> posts = postService.searchPosts(search);
-//        return ResponseEntity.ok(posts);
-//    }
-
-
-    private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
     @GetMapping(value = "/search", produces = "application/json; charset=UTF-8")
     public ResponseEntity<List<PostResponseDTO>> searchPosts(@RequestParam("search") String search) {
-        logger.info("Received search parameter: {}", search);  // 로그 추가
         List<PostResponseDTO> posts = postService.searchPosts(search);
         return ResponseEntity.ok(posts);
     }
